@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Smart Interview Report Generator</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; margin-top: 100px; }
+    input, button { padding: 10px; font-size: 16px; margin: 10px; }
+  </style>
+</head>
+<body>
+  <h2>📄 Upload Transcript to Get Interview Feedback</h2>
+  <form id="uploadForm">
+    <input type="file" name="transcript" required />
+    <br />
+    <button type="submit">🧠 Generate Feedback PDF</button>
+  </form>
+
+  <p id="status"></p>
+
+  <script>
+    const form = document.getElementById("uploadForm");
+    const status = document.getElementById("status");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      status.textContent = "⏳ Processing... Please wait";
+
+      try {
+        const response = await fetch("/api/analyze", {
+          method: "POST",
+          body: formData
+        });
+
+        if (!response.ok) throw new Error("Error generating PDF");
+
+        const blob = await response.blob();
+        const link = document.createElement("a");
+        link.href = window.URL.createObjectURL(blob);
+        link.download = "Interview_Feedback.pdf";
+        link.click();
+
+        status.textContent = "✅ PDF downloaded successfully!";
+      } catch (err) {
+        status.textContent = "❌ Failed: " + err.message;
+      }
+    });
+  </script>
+</body>
+</html>

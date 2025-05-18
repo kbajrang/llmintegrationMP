@@ -1,5 +1,0 @@
-flask
-python-dotenv
-openai
-reportlab
-flask-cors
