@@ -4,6 +4,9 @@ from dotenv import load_dotenv
 import os
 import uuid
 import traceback
+import os
+PORT = int(os.environ.get("PORT", 10000))
+
 
 from utils.llm_engine import analyze_transcript
 from utils.pdf_generator import generate_pdf
@@ -54,4 +57,5 @@ def analyze():
         return jsonify({"error": "Internal server error", "details": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=PORT)
+
