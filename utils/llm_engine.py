@@ -55,11 +55,14 @@ Transcript:
         "temperature": 0.8,
     }
 
-    response = requests.post(url, headers=headers, json=payload)
-    response.raise_for_status()
-    content = response.json()['choices'][0]['message']['content']
-
     try:
+        response = requests.post(url, headers=headers, json=payload)
+        response.raise_for_status()
+        content = response.json()['choices'][0]['message']['content']
         return json.loads(content)
     except Exception as e:
-        return {"error": "Failed to parse JSON", "raw_response": content, "exception": str(e)}
+        return {
+            "error": "Failed to analyze transcript",
+            "exception": str(e),
+            "raw_response": response.text if 'response' in locals() else "No response"
+        }

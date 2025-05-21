@@ -1,48 +1,121 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Smart Interview Report Generator</title>
+  <meta charset="UTF-8">
+  <title>📩 Send Interview Feedback</title>
   <style>
-    body { font-family: sans-serif; text-align: center; margin-top: 100px; }
-    input, button { padding: 10px; font-size: 16px; margin: 10px; }
+    body {
+      background: #f3f4f6;
+      font-family: Arial, sans-serif;
+      padding: 50px;
+    }
+    .container {
+      background: white;
+      max-width: 600px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      color: #1e40af;
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      margin-top: 8px;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background-color: #1d4ed8;
+      color: white;
+      border: none;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2563eb;
+    }
+    .status {
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+    .status.success {
+      color: green;
+    }
+    .status.error {
+      color: red;
+    }
   </style>
 </head>
 <body>
-  <h2>📄 Upload Transcript to Get Interview Feedback</h2>
-  <form id="uploadForm">
-    <input type="file" name="transcript" required />
-    <br />
-    <button type="submit">🧠 Generate Feedback PDF</button>
-  </form>
+  <div class="container">
+    <h2>📬 Send Feedback Email with PDF</h2>
+    <form id="feedbackForm">
+      <label for="email">Email (Candidate)</label>
+      <input type="email" name="email" id="email" required placeholder="candidate@example.com" />
+      
+      <label for="subject">Subject</label>
+      <input type="text" name="subject" id="subject" placeholder="Smart Interview Feedback Report" value="Smart Interview Feedback Report" />
 
-  <p id="status"></p>
+      <label for="roomId">Room ID</label>
+      <input type="text" name="roomId" id="roomId" placeholder="123456 (optional)" />
+
+      <label for="message">Message</label>
+      <textarea name="message" id="message" rows="6" placeholder="Thank you for attending the interview. Please find the feedback report attached.">Thank you for attending the interview. Please find the feedback report attached.</textarea>
+      
+      <button type="submit">Send Email</button>
+    </form>
+    <div class="status" id="statusMsg"></div>
+  </div>
 
   <script>
-    const form = document.getElementById("uploadForm");
-    const status = document.getElementById("status");
-
-    form.addEventListener("submit", async (e) => {
+    document.getElementById('feedbackForm').addEventListener('submit', async function (e) {
       e.preventDefault();
-      const formData = new FormData(form);
-      status.textContent = "⏳ Processing... Please wait";
+
+      const statusMsg = document.getElementById("statusMsg");
+      statusMsg.textContent = "Sending...";
+      statusMsg.className = "status";
+
+      const payload = {
+        email: document.getElementById("email").value,
+        subject: document.getElementById("subject").value,
+        roomId: document.getElementById("roomId").value,
+        message: document.getElementById("message").value,
+      };
 
       try {
-        const response = await fetch("/api/analyze", {
+        const res = await fetch("/api/send-feedback", {
           method: "POST",
-          body: formData
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
         });
 
-        if (!response.ok) throw new Error("Error generating PDF");
+        const result = await res.json();
 
-        const blob = await response.blob();
-        const link = document.createElement("a");
-        link.href = window.URL.createObjectURL(blob);
-        link.download = "Interview_Feedback.pdf";
-        link.click();
-
-        status.textContent = "✅ PDF downloaded successfully!";
+        if (res.ok) {
+          statusMsg.textContent = result.message || "✅ Feedback sent successfully!";
+          statusMsg.className = "status success";
+        } else {
+          statusMsg.textContent = result.error || "❌ Failed to send feedback.";
+          statusMsg.className = "status error";
+        }
       } catch (err) {
-        status.textContent = "❌ Failed: " + err.message;
+        statusMsg.textContent = "❌ Server error: " + err.message;
+        statusMsg.className = "status error";
       }
     });
   </script>

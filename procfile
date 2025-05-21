@@ -1,0 +1,2 @@
+# Procfile for deployment on platforms like Heroku or Render
+worker: python gmail_feedback_watcher.py

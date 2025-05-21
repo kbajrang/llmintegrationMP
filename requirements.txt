@@ -3,3 +3,13 @@ flask-cors
 reportlab
 python-dotenv
 requests
+Flask
+flask-cors
+python-dotenv
+requests
+reportlab
+pymongo
+google-api-python-client
+google-auth
+google-auth-httplib2
+google-auth-oauthlib
