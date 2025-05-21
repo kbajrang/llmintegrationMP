@@ -27,8 +27,7 @@ def authenticate_gmail():
     if not credentials_json:
         raise Exception("Missing GOOGLE_CREDENTIALS_JSON environment variable")
 
-    flow = InstalledAppFlow.from_client_config(json.loads(credentials_json), SCOPES)
-    creds = flow.run_console()  # Console flow for headless environments like Render
+    creds = Credentials.from_authorized_user_info(json.loads(credentials_json), SCOPES)
     return build('gmail', 'v1', credentials=creds)
 
 def check_feedback_requests(service):
