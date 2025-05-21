@@ -3,7 +3,7 @@ services:
     name: LLM-Feedack-Serivce
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: python pdf_service.py
+    startCommand: python gmail_feedback_watcher.py
     envVars:
       - key: OPENROUTER_API_KEY
         sync: false
