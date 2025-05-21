@@ -5,7 +5,6 @@ import traceback
 import json
 from email.message import EmailMessage
 from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from pymongo import MongoClient
 from utils.llm_engine import analyze_transcript
@@ -27,7 +26,19 @@ def authenticate_gmail():
     if not credentials_json:
         raise Exception("Missing GOOGLE_CREDENTIALS_JSON environment variable")
 
-    creds = Credentials.from_authorized_user_info(json.loads(credentials_json), SCOPES)
+    token_data = json.loads(credentials_json)
+    required_fields = ["client_id", "client_secret", "refresh_token"]
+    if not all(field in token_data for field in required_fields):
+        raise ValueError("GOOGLE_CREDENTIALS_JSON is missing required fields: client_id, client_secret, refresh_token")
+
+    creds = Credentials(
+        token=None,
+        refresh_token=token_data["refresh_token"],
+        token_uri="https://oauth2.googleapis.com/token",
+        client_id=token_data["client_id"],
+        client_secret=token_data["client_secret"]
+    )
+
     return build('gmail', 'v1', credentials=creds)
 
 def check_feedback_requests(service):
