@@ -2,6 +2,7 @@ import os
 import base64
 import time
 import traceback
+import json  # ✅ Added
 from email.message import EmailMessage
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -15,11 +16,8 @@ SCOPES = ['https://www.googleapis.com/auth/gmail.modify']
 
 MONGO_URI = os.getenv("MONGO_URI")
 client = MongoClient(MONGO_URI)
-
-# ✅ correct
 db = client["SmartInterviewSystem"]
 transcript_collection = db["Savedtranscripts"]
-
 
 SENDER_EMAIL = os.getenv("SENDER_EMAIL")
 SENDER_PASSWORD = os.getenv("SENDER_PASSWORD")
@@ -29,7 +27,8 @@ def authenticate_gmail():
     if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json', SCOPES)
     else:
-        flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
+        credentials_json = os.getenv("GOOGLE_CREDENTIALS_JSON")
+        flow = InstalledAppFlow.from_client_config(json.loads(credentials_json), SCOPES)
         creds = flow.run_local_server(port=0)
         with open('token.json', 'w') as token:
             token.write(creds.to_json())
@@ -49,12 +48,13 @@ def get_sender_and_mark_read(service, msg_id):
     return sender_email
 
 def send_feedback(email):
-    doc = collection.find_one({ "email": email })
+    doc = transcript_collection.find_one({ "email": email })
     if not doc:
         print(f"❌ No transcript found for {email}")
         return
 
     transcript = doc["transcript_text"]
+    os.makedirs("uploads", exist_ok=True)
     temp_path = f"uploads/{email.replace('@', '_at_')}.txt"
     with open(temp_path, "w", encoding="utf-8") as f:
         f.write(transcript)
