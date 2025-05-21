@@ -2,7 +2,7 @@ import os
 import base64
 import time
 import traceback
-import json  # ✅ Added
+import json
 from email.message import EmailMessage
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -23,15 +23,12 @@ SENDER_EMAIL = os.getenv("SENDER_EMAIL")
 SENDER_PASSWORD = os.getenv("SENDER_PASSWORD")
 
 def authenticate_gmail():
-    creds = None
-    if os.path.exists('token.json'):
-        creds = Credentials.from_authorized_user_file('token.json', SCOPES)
-    else:
-        credentials_json = os.getenv("GOOGLE_CREDENTIALS_JSON")
-        flow = InstalledAppFlow.from_client_config(json.loads(credentials_json), SCOPES)
-        creds = flow.run_local_server(port=0)
-        with open('token.json', 'w') as token:
-            token.write(creds.to_json())
+    credentials_json = os.getenv("GOOGLE_CREDENTIALS_JSON")
+    if not credentials_json:
+        raise Exception("Missing GOOGLE_CREDENTIALS_JSON environment variable")
+
+    flow = InstalledAppFlow.from_client_config(json.loads(credentials_json), SCOPES)
+    creds = flow.run_console()  # Console flow for headless environments like Render
     return build('gmail', 'v1', credentials=creds)
 
 def check_feedback_requests(service):
@@ -102,7 +99,7 @@ def run_watcher():
             print("❌ Error:", str(e))
             traceback.print_exc()
 
-        time.sleep(3600)  # check every hour
+        time.sleep(3600)
 
 if __name__ == '__main__':
     run_watcher()
