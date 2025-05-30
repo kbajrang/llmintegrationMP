@@ -44,14 +44,13 @@ Transcript:
     url = "https://openrouter.ai/api/v1/chat/completions"
     headers = {
         "Authorization": f"Bearer {os.getenv('OPENROUTER_API_KEY')}",
-        "Content-Type": "application/json",
-        "HTTP-Referer": "http://localhost"
+        "Content-Type": "application/json"
     }
 
     payload = {
         "model": "openai/gpt-3.5-turbo",
         "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": 7000,
+        "max_tokens": 3000,
         "temperature": 0.8,
     }
 
