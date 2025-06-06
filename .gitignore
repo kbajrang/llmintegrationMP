@@ -1,0 +1,12 @@
+# Python cache and environment files
+__pycache__/
+*.pyc
+.env
+
+# Uploaded transcripts and generated PDF reports
+uploads/
+static/reports/
+
+# Local IDE settings
+.vscode/
+.idea/

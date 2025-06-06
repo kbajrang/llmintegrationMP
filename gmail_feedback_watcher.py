@@ -1,5 +1,4 @@
 import os
-import base64
 import time
 import traceback
 import json
@@ -10,8 +9,6 @@ from pymongo import MongoClient
 from utils.llm_engine import analyze_transcript
 from utils.pdf_generator import generate_pdf
 import smtplib
-
-SCOPES = ['https://www.googleapis.com/auth/gmail.modify']
 
 MONGO_URI = os.getenv("MONGO_URI")
 client = MongoClient(MONGO_URI)

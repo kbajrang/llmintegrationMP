@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>📩 Send Interview Feedback</title>
+  <meta charset="UTF-8" />
+  <title>📨 Interview Actions</title>
   <style>
     body {
       background: #f3f4f6;
       font-family: Arial, sans-serif;
-      padding: 50px;
+      padding: 40px;
     }
     .container {
       background: white;
@@ -18,24 +18,23 @@
       box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
     }
     h2 {
-      color: #1e40af;
       text-align: center;
+      color: #1e40af;
     }
     label {
-      display: block;
-      margin-top: 15px;
       font-weight: bold;
+      margin-top: 20px;
+      display: block;
     }
     input, textarea {
       width: 100%;
-      margin-top: 8px;
       padding: 12px;
       font-size: 1rem;
       border-radius: 8px;
       border: 1px solid #cbd5e1;
+      margin-top: 8px;
     }
     button {
-      margin-top: 20px;
       width: 100%;
       padding: 12px;
       background-color: #1d4ed8;
@@ -43,10 +42,15 @@
       border: none;
       font-size: 1rem;
       border-radius: 8px;
+      margin-top: 15px;
       cursor: pointer;
     }
     button:hover {
       background-color: #2563eb;
+    }
+    .result-section {
+      display: none;
+      margin-top: 15px;
     }
     .status {
       margin-top: 20px;
@@ -63,39 +67,78 @@
 </head>
 <body>
   <div class="container">
-    <h2>📬 Send Feedback Email with PDF</h2>
-    <form id="feedbackForm">
-      <label for="email">Email (Candidate)</label>
-      <input type="email" name="email" id="email" required placeholder="candidate@example.com" />
-      
-      <label for="subject">Subject</label>
-      <input type="text" name="subject" id="subject" placeholder="Smart Interview Feedback Report" value="Smart Interview Feedback Report" />
+    <h2>📬 Smart Interview Manager</h2>
+    
+    <label for="email">Candidate Email</label>
+    <input type="email" id="email" placeholder="example@domain.com" required />
 
-      <label for="roomId">Room ID</label>
-      <input type="text" name="roomId" id="roomId" placeholder="123456 (optional)" />
+    <button onclick="viewTranscript()">📄 View Transcript</button>
+    <button onclick="sendFeedback()">📝 Send Feedback PDF</button>
+    <button onclick="toggleResults()">📢 Send Result</button>
 
-      <label for="message">Message</label>
-      <textarea name="message" id="message" rows="6" placeholder="Thank you for attending the interview. Please find the feedback report attached.">Thank you for attending the interview. Please find the feedback report attached.</textarea>
-      
-      <button type="submit">Send Email</button>
-    </form>
+    <div class="result-section" id="resultsSection">
+      <label for="selectedMsg">Message for Selected</label>
+      <textarea id="selectedMsg" rows="3">🎉 Congratulations! You have been selected for the role based on your interview performance.</textarea>
+      <button onclick="sendResult('selected')">✅ Send Selected</button>
+
+      <label for="rejectedMsg">Message for Not Selected</label>
+      <textarea id="rejectedMsg" rows="3">🙏 Thank you for your time and effort. Unfortunately, you were not selected this time.</textarea>
+      <button onclick="sendResult('rejected')">❌ Send Not Selected</button>
+    </div>
+
     <div class="status" id="statusMsg"></div>
   </div>
 
   <script>
-    document.getElementById('feedbackForm').addEventListener('submit', async function (e) {
-      e.preventDefault();
+    function getEmail() {
+      return document.getElementById("email").value.trim();
+    }
 
-      const statusMsg = document.getElementById("statusMsg");
-      statusMsg.textContent = "Sending...";
-      statusMsg.className = "status";
+    function toggleResults() {
+      const section = document.getElementById("resultsSection");
+      section.style.display = section.style.display === "block" ? "none" : "block";
+    }
+
+    async function viewTranscript() {
+      const email = getEmail();
+      const status = document.getElementById("statusMsg");
+      if (!email) {
+        status.textContent = "❗ Enter an email address.";
+        status.className = "status error";
+        return;
+      }
+
+      const res = await fetch(`/api/get-transcript?email=${email}`);
+      const result = await res.json();
+
+      if (res.ok) {
+        const blob = new Blob([result.transcript], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        window.open(url, "_blank");
+        status.textContent = "";
+      } else {
+        status.textContent = result.error;
+        status.className = "status error";
+      }
+    }
+
+    async function sendFeedback() {
+      const email = getEmail();
+      const status = document.getElementById("statusMsg");
+      if (!email) {
+        status.textContent = "❗ Enter an email address.";
+        status.className = "status error";
+        return;
+      }
 
       const payload = {
-        email: document.getElementById("email").value,
-        subject: document.getElementById("subject").value,
-        roomId: document.getElementById("roomId").value,
-        message: document.getElementById("message").value,
+        email,
+        subject: "Smart Interview Feedback Report",
+        message: "Thank you for attending the interview. Your feedback report is attached."
       };
+
+      status.textContent = "⏳ Sending feedback...";
+      status.className = "status";
 
       try {
         const res = await fetch("/api/send-feedback", {
@@ -105,19 +148,47 @@
         });
 
         const result = await res.json();
-
-        if (res.ok) {
-          statusMsg.textContent = result.message || "✅ Feedback sent successfully!";
-          statusMsg.className = "status success";
-        } else {
-          statusMsg.textContent = result.error || "❌ Failed to send feedback.";
-          statusMsg.className = "status error";
-        }
-      } catch (err) {
-        statusMsg.textContent = "❌ Server error: " + err.message;
-        statusMsg.className = "status error";
+        status.textContent = result.message || result.error;
+        status.className = res.ok ? "status success" : "status error";
+      } catch (e) {
+        status.textContent = "❌ Error: " + e.message;
+        status.className = "status error";
       }
-    });
+    }
+
+    async function sendResult(type) {
+      const email = getEmail();
+      const message = type === "selected"
+        ? document.getElementById("selectedMsg").value
+        : document.getElementById("rejectedMsg").value;
+
+      const endpoint = type === "selected" ? "/api/finalize-success" : "/api/finalize-failure";
+      const payload = {
+        email,
+        roomId: "N/A",
+        message,
+        ...(type === "rejected" && { violations: "Generic rejection" })
+      };
+
+      const status = document.getElementById("statusMsg");
+      status.textContent = "⏳ Sending result...";
+      status.className = "status";
+
+      try {
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await res.json();
+        status.textContent = result.message || result.error;
+        status.className = res.ok ? "status success" : "status error";
+      } catch (e) {
+        status.textContent = "❌ Error: " + e.message;
+        status.className = "status error";
+      }
+    }
   </script>
 </body>
 </html>

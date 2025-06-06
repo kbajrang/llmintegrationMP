@@ -15,6 +15,25 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 def index():
     return "✅ Interview PDF API is running!"
 
+@app.route("/api/get-transcript")
+def get_transcript():
+    from pymongo import MongoClient
+    MONGO_URI = os.getenv("MONGO_URI")
+    client = MongoClient(MONGO_URI)
+    db = client["SmartInterviewSystem"]
+    transcript_collection = db["Savedtranscripts"]
+
+    email = request.args.get("email")
+    if not email:
+        return jsonify({"error": "Email required"}), 400
+
+    doc = transcript_collection.find_one({"email": email})
+    if not doc or "transcript_text" not in doc:
+        return jsonify({"error": f"No transcript found for {email}"}), 404
+
+    return jsonify({"transcript": doc["transcript_text"]})
+
+
 @app.route("/api/generate-report", methods=["POST"])
 def generate_report():
     try:

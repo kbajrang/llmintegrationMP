@@ -1,0 +1,914 @@
+Java Mock Interview for Freshers
+0:01
+foreign
+0:10
+[Music]
+0:15
+okay so shall we start
+0:17
+yeah it's okay so Baba can you give me a
+Introduction
+0:21
+small introduction about yourself
+0:23
+thank you for the opportunity uh my name
+0:27
+ishwar and I've done my b-tech from
+0:29
+computer science branch I got 7.8 cgp in
+0:33
+my colleges and I got a 78 in my 12th
+0:37
+standard
+0:38
+regarding technical skills computer
+0:40
+science is present in every field as
+0:42
+everyone knows so I spent the last four
+0:44
+years owning my Technical and software
+0:46
+skills in computer science I've learned
+0:48
+programming in Java C C plus plus
+0:51
+JavaScript which I'm learning right now
+0:53
+I've learned database Technologies like
+0:55
+SQL MySQL mongodb I've created some
+0:58
+projects like Library management quiz
+1:00
+app and calculator and there are other
+1:03
+small projects that are made I think
+1:05
+that they're in my CV actually you can
+1:07
+find the GitHub links for those there
+1:08
+are small small projects are there as
+1:10
+well apart from that I think what has
+1:12
+helped me the most is participating in a
+1:15
+lot of hackathons
+1:16
+both online and offline they really
+1:19
+helped me to you know be aware of what
+1:22
+my peers are learning and kind of kept
+1:24
+me ahead of the curve so that I can keep
+1:26
+myself updated with technology and apart
+1:29
+from technical skills regarding personal
+1:31
+life I have few Hobbies I love to play
+1:33
+football I love
+1:35
+reading as well and I love watching
+1:39
+science fiction movies
+1:40
+so they think that wraps up everything
+1:42
+about me okay okay so my next question
+Long-term goals
+1:46
+is what are your long-term goals
+1:50
+uh my long-term goals would be to gain
+1:53
+as much experience as I can in my domain
+1:55
+that is additionally I plan on what I
+1:58
+learned using these initial formative
+2:00
+years from a uh for my next
+2:03
+few years which can help me move into a
+2:06
+more senior position so uh using
+2:08
+previous expense will help me so that
+2:10
+when opportunities come for promotions
+2:12
+or any other opportunities come then I
+2:15
+can make use of it if I use the correct
+2:18
+skills as such having a long-term Vision
+2:21
+in while starting out a career in
+2:23
+corporate can be very helpful so that
+2:24
+you can apply yourself in the right
+2:26
+direction and be aligned with that plan
+2:28
+I think that's my long-term goal as of
+2:31
+now at least okay good can you state the
+Difference between Hard Work and Smart work
+2:35
+difference between hard work and smart
+2:36
+work
+2:38
+I really both are necessary in a person
+2:41
+one person needs to understand how when
+2:43
+to use Smart work and when to use hard
+2:45
+work uh but I think uh what really
+2:48
+differentiates is using less resources
+2:50
+and less time to achieve the same result
+2:52
+by putting more effort in high yielding
+2:53
+activities rather than
+2:55
+mindlessly slaving away I think that's
+2:57
+what makes the distinction between hard
+2:59
+work and smart work uh more prominent
+3:02
+it's like uh I think there's a quote by
+3:04
+Steve Jobs or some uh no I'm sorry that
+3:06
+that quote is from Bill Gates where he
+3:07
+said that I will find a lazy person to
+3:09
+do a difficult job because he'll find an
+3:11
+easy way to do it
+3:13
+so I think that pretty much sums it up
+3:15
+the difference between hard and smart
+3:16
+work okay good very good uh now let's
+Technical Questions
+3:19
+start with the technical questions sure
+3:21
+first treat yourself in Java out of 10.
+3:24
+uh I think I rate myself for 6.5 out of
+3:27
+10 in Java
+3:29
+okay okay good now tell me what are jdk
+What is JVM, JRE, and JDK?
+3:32
+jvm and JRE
+3:34
+please explain about them
+3:37
+sure let me go one by one first would be
+3:40
+the GDK which is the Java development
+3:42
+kit software package of jvm and Jr it
+3:45
+contains both it jdk basically provides
+3:48
+the standard edition of the Java
+3:50
+application programming interface
+3:52
+second was jvm which is the Java virtual
+3:55
+machine it's basically converts the
+3:57
+program into bytecode which basically
+3:59
+means it converts a user-friendly syntax
+4:01
+to machine language that the machine can
+4:04
+Java machine and The Interpreter can
+4:06
+understand okay
+4:08
+third one would be the JRE which is the
+4:10
+Java runtime environment and provides
+4:12
+the libraries and the resources for jdk
+4:16
+to execute the Java programs I think
+4:17
+that's the main distinction between
+4:19
+these three yeah right right so uh can
+JAVA Pointers
+4:22
+you tell me does Java include pointers
+4:25
+um no Java does not include pointers can
+4:27
+you just please explain
+4:29
+okay so basically the first point of
+4:31
+pointers are the main benefit I would
+4:33
+say would be to uh for uh taking a
+4:36
+memory allocation purposes so Java
+4:39
+already has jvm like you mentioned
+4:40
+before so jvm automatically takes care
+4:42
+of memory allocation so there is no
+4:44
+real-time use case as such and when it
+4:47
+comes to a side benefits or pointers uh
+4:49
+like uh clearing memory because it just
+4:53
+points to a specific memory for clearing
+4:55
+memory Java also has this garbage
+4:56
+collector so all in all there is no
+4:58
+particular use case in majority of the
+5:00
+cases in Java where we would actually
+5:02
+require a pointer that is not something
+5:04
+already being done by Java right itself
+5:06
+okay so you are saying Java does not use
+5:09
+pointer in real time programming right
+5:11
+correct whatever all those benefits or
+5:14
+pointers that they offer in C Java takes
+5:17
+care of it on its own okay okay good uh
+Java Time API
+5:20
+list some Java 8 date and time apis
+5:22
+I think the Three core apis would be the
+5:24
+local date local time and local date
+5:27
+time
+5:28
+okay
+5:29
+uh what is the default method and when
+Default Method in java
+5:32
+does it get used the default method
+5:36
+actually involves an implementation and
+5:38
+it is found in an interface the method
+5:40
+adds new functionalities to an interface
+5:42
+while preserving backward compiler
+5:44
+backward compatibility with the classes
+5:47
+that have already implemented that
+5:48
+particular interface I think that's a
+5:50
+main purpose of our default method in
+5:52
+general
+5:53
+okay okay
+5:54
+uh okay can you mention the main classes
+Classes Implementing List interface
+5:57
+implementing the list interface
+6:00
+first I think the most important will be
+6:02
+the linked list which basically linked
+6:04
+elements with no index and arraylist
+6:07
+which can be indexed then Vector which
+6:10
+is similar to array in some aspects and
+6:13
+it also can be indexed and the fourth
+6:15
+would be a stack stack which follows the
+6:18
+last in first dot methodology of the of
+6:21
+data structure
+6:22
+okay you just said array can you explain
+What is an Array?
+6:26
+what is an array
+6:28
+array can be referred to as a collection
+6:31
+of items which are stored in a
+6:32
+continuous memory locations it's it must
+6:35
+contain items of the same data type when
+6:37
+it organizes data in a related set of
+6:39
+values that can easily be sorted
+6:41
+searched manipulated
+6:44
+Etc so basically it helps create a
+6:46
+collection of similarly uh defined
+6:48
+variables uh values in a single array
+6:51
+variable okay so we cannot store any
+6:54
+other data types in Array right yeah all
+6:58
+elements must be of the same data type
+7:00
+there cannot be any mix and match okay
+7:02
+okay good can you explain what is in
+What is a Linked List?
+7:04
+linked list
+7:06
+it's kind of similar to array but it
+7:09
+refers to linear data structure in which
+7:11
+the elements are not necessarily stored
+7:12
+in a continuous manner like they are
+7:14
+stored in an array so it's basically a
+7:16
+sequence of nodes with each node
+7:18
+pointing towards the next node then
+7:20
+that's how it forms a chain-like
+7:22
+structure that's how it's different from
+7:24
+an array okay mention the link list
+Linked list supported by java
+7:28
+supported by Java
+7:29
+a Java supports to a singly linked list
+7:31
+and W linked list single linked lists
+7:33
+where each node points to uh stores the
+7:36
+data and references to the next node
+7:38
+whereas the W linked list has points to
+7:40
+two different ones which is the one
+7:41
+before it and the one after it these are
+7:44
+the only two that are the job okay good
+what is Recursion?
+7:46
+uh can you tell me what is regretation
+7:49
+what is recursion
+7:51
+you must have read about this
+7:54
+yes uh recursion would refer to a
+7:56
+function calling itself under a
+7:58
+particular terminating condition follows
+8:00
+the last in first out methodology and it
+8:03
+makes use of the stack uh data structure
+8:07
+okay now please tell me which sorting
+8:11
+algorithm is best according to you
+Which sorting algorithm is the best?
+8:14
+uh I don't think any sorting algorithm
+8:16
+can be considered the best okay there
+8:19
+are many like bubble sort selection sort
+8:21
+balloons or Radix or all those things
+8:22
+are there but I don't think we can turn
+8:24
+any one of them as the best because they
+8:25
+all have different use cases if the if
+8:28
+there would have been a single best
+8:29
+sorting algorithm all of us would be
+8:31
+using only that one right so I don't
+8:32
+think there's particular best they are
+8:34
+fit for the specific type of data
+8:36
+structures where it performs the most
+8:38
+efficiently so no I don't think there is
+8:40
+particularly in my opinion I don't know
+8:41
+the best sorting algorithm okay right uh
+What is the difference between systems.out, System.err, and System.in?
+8:45
+what is the difference between system
+8:46
+dot out system.e Double R and system.in
+8:53
+to error
+8:56
+can you just explain about it
+8:59
+yes uh system dot out and system.err
+9:02
+represent the monitor by default and
+9:04
+this can be used to send data or results
+9:07
+to the monitor so system.out
+9:09
+specifically is used to display normal
+9:11
+messages and results basically the print
+9:13
+function of the Java family
+9:15
+system.err is used to display the error
+9:17
+messages and setup.in third refers the
+9:21
+input string which uh is saying pushing
+9:24
+object actually which by default
+9:25
+represents standard input device which
+9:28
+in almost 99 of the cases is a keyboard
+9:30
+okay now can you write down the syntax
+Syntax on how to create a linked list and a vector in Java?
+9:35
+on how to create a linked list and a
+9:37
+vector in Java you can just type it in
+9:40
+the chat box
+9:42
+uh sure
+9:47
+I'll actually create a new object okay
+9:50
+author linked list class here yeah
+9:54
+[Music]
+10:01
+I just want to see the logic only okay
+10:03
+okay
+10:04
+uh this is to create only the object
+10:07
+variable for the linked list I know
+10:09
+actually uh
+10:11
+[Music]
+10:12
+okay
+10:22
+[Music]
+10:24
+it's quite similar to the
+10:26
+link list object but we have to add two
+10:29
+more parameters which would be the size
+10:31
+and increment okay
+10:36
+let's type it here only I think I have
+10:38
+shared
+10:40
+okay
+10:42
+okay fine
+10:44
+so my next question is how do you get
+How to find the highest number that exists in a list?
+10:47
+the highest number that exists on a list
+10:49
+just write a code here only okay should
+10:53
+I just put a sample uh yeah yeah I just
+10:56
+want to see the approach you are using
+10:58
+sure okay I'll just write the code again
+11:00
+highest number that exists on a list you
+11:03
+can take any random list
+11:06
+I'll create a list with integer
+11:09
+value
+11:23
+[Music]
+11:26
+foreign
+11:57
+foreign
+12:15
+list
+12:16
+okay
+12:28
+foreign
+12:43
+yes okay
+12:49
+I think that should be enough like
+12:51
+should I elaborate more or do you think
+12:54
+it's yeah it's fine it's fine I just
+12:56
+wanted to see the approach that you're
+12:58
+using okay now can you write how to do
+How do you reverse a string in Java?
+13:03
+the reverse in string in Java
+13:05
+reversing a string right yeah okay
+13:10
+you can just take a string hello and
+13:13
+just reverse it okay I'll put it in a
+13:16
+variable
+13:18
+[Music]
+13:23
+I'll create a
+13:25
+dummy variable named reverse where the
+13:29
+actual reversed output will be stored
+13:31
+first I'll take the length of the string
+13:37
+and store it in the length variable like
+13:41
+I just shared next I'll start a for Loop
+13:56
+uh there's a single line in the body
+13:58
+I'll just
+13:59
+write that down separately okay
+14:05
+so you are taking basically it's taking
+14:07
+all the elements and it will keep adding
+14:10
+them to the
+14:11
+reverse variable that I had declared
+14:13
+before and the next step would be to
+14:16
+just print out the final reverse
+14:19
+variable
+14:26
+I think that will reverse the string
+14:28
+completely okay
+14:32
+okay fine
+14:34
+now
+How many objects can a hashmap have?
+14:36
+how many objects will be inside the hash
+14:38
+map
+14:41
+um there can be two elements with the
+14:43
+same hash code but when two elements
+14:46
+have the same hash code Java uses the
+14:48
+equals to further differentiate so there
+14:51
+can be one or two objects depending on
+14:53
+the content of the objects
+14:56
+yeah okay okay now give an example how
+how to create a HashMap
+15:00
+to create a hash map
+15:02
+in the chat only okay so like a sample
+15:04
+yeah
+15:05
+okay sure
+15:08
+I'll first import the necessary
+15:10
+libraries
+15:17
+this is the hashmap library then I will
+15:21
+report
+15:24
+the mapping Library
+15:27
+I'll start the main function okay
+15:35
+the class declaration
+15:37
+um now I would go with
+15:44
+[Music]
+15:46
+and now I'll start the body of the main
+15:48
+function
+15:51
+if you need time to just think of the
+15:53
+approach you can take time with this
+15:55
+which I thank you so much
+15:59
+um
+15:59
+I'll be putting two string values
+16:10
+declaring a new hash map right now
+16:13
+hmm
+16:15
+[Music]
+16:20
+[Music]
+16:22
+uh declare the new initialize the new
+16:25
+hash map then I'll start storing data in
+16:28
+these hashmaps
+16:31
+using the put function
+16:41
+this would be the first element and next
+16:43
+would be
+16:46
+similarly I'll put another element just
+16:48
+to show
+17:00
+okay you're taking the car names okay
+17:11
+so I've already just put two in the hash
+17:15
+map so now I can I can keep adding more
+17:18
+but I think if I just adding I can just
+17:21
+talk just add two or three only yeah so
+17:24
+these two are done so I can just print
+17:27
+out as
+17:29
+obj
+17:33
+and just basically close the main
+17:35
+function that's it
+17:36
+I think this will
+17:39
+okay just let me read once
+17:56
+it's good
+17:57
+okay can you please tell me what are
+HR Interview Questions
+18:00
+your greatest strength and weaknesses
+18:03
+okay I'll start with my strengths I
+18:06
+think my ability to work well in a team
+18:08
+is one of my finest assets I have a
+18:11
+strong sense of self-motivation and I'm
+18:13
+a very quick learner
+18:14
+whatever assignment I get I usually uh I
+18:17
+tend to finish it very diligently and
+18:19
+preferably ahead of schedule
+18:22
+I don't know if there are any standout
+18:24
+weaknesses as such but one thing that I
+18:26
+believe can be improved about myself I'm
+18:28
+a people skills indulging in
+18:30
+conversation with co-workers and people
+18:32
+I'm not very comfortable with or talk
+18:34
+regularly with but I have been working
+18:36
+on that a lot and there has been a lot
+18:38
+of progress and there is going to be
+18:40
+more for sure moving on
+18:42
+I think that's the only thing that I can
+18:44
+count as a weakness okay good uh so
+18:47
+where do you see yourself in five years
+18:51
+okay uh I think initially I would first
+18:54
+uh like to grow my skills as a team
+18:56
+player in the first few years at any
+18:59
+organization uh then understanding how
+19:01
+upper level management works and then
+19:03
+ultimately uh get up earn a managerial
+19:05
+position
+19:06
+most likely handling a very high output
+19:09
+team and being able to Mentor a bright
+19:11
+group of people who who are prepping for
+19:14
+their next step in their career just
+19:16
+like I would have done by them
+19:18
+now tell me why should we hire you
+19:22
+uh have a very strong sense of
+19:23
+motivation I really push myself to
+19:26
+improve and learn more I am very
+19:28
+open-minded as well and I pick things up
+19:30
+rather quickly like to solve
+19:32
+difficulties and hopefully solve
+19:33
+roadblocks for our teammates come as me
+19:35
+okay apart from that from apart from
+19:38
+spills perspective additionally I
+19:41
+believe that the values of this
+19:42
+organization and mind are very
+19:44
+compatible so that's why I think I
+19:46
+believe that this job in this position
+19:48
+will support my interests and present me
+19:50
+with enough engaging and exciting
+19:52
+opportunities that will help me advance
+19:54
+myself and the company so that's why
+19:58
+frankly I'm very excited about this
+19:59
+chance okay okay good okay so thank you
+20:04
+baba this is all from my side if you
+20:06
+have any questions you can ask me
+20:10
+I think uh I really have only one
+20:12
+question uh can you tell me about a
+20:14
+company and the more importantly the
+20:16
+daily responsibility is that I'll be you
+20:18
+know asked to ahead on a day-to-day
+20:19
+basis okay so wherever right now I can't
+20:22
+tell you everything but we are a
+20:24
+software company we develop software
+20:26
+according to the needs of the clients
+20:28
+and everyone is Young and energetic here
+20:31
+so the environment is also very good
+20:34
+okay I think that's all I needed to know
+20:37
+okay okay thank you so much for your
+20:40
+interest
+20:41
+we'll let you know the results very soon
+20:43
+okay so thank you so much I will
+20:45
+definitely look forward to hearing
+20:47
+okay
+20:52
+hi there if you like this video
+20:54
+subscribe to the simply learn YouTube
+20:56
+channel and click here to watch similar
+20:59
+videos turn it up and get certified
+21:01
+click here

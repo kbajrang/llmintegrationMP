@@ -1,13 +1,21 @@
 import os
+import json
 import requests
 from dotenv import load_dotenv
-import json
 
 load_dotenv()
 
-def analyze_transcript(transcript_path):
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+
+
+def analyze_transcript(transcript_path, model: str = "openai/gpt-3.5-turbo") -> dict:
+    """Analyze a transcript file using the configured LLM service."""
+
     if not os.path.exists(transcript_path):
         return {"error": f"Transcript not found at {transcript_path}"}
+
+    if not OPENROUTER_API_KEY:
+        return {"error": "OPENROUTER_API_KEY not configured"}
 
     with open(transcript_path, "r", encoding="utf-8") as f:
         transcript = f.read()
@@ -43,15 +51,14 @@ Transcript:
 
     url = "https://openrouter.ai/api/v1/chat/completions"
     headers = {
-        "Authorization": f"Bearer {os.getenv('OPENROUTER_API_KEY')}",
+        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
         "Content-Type": "application/json",
-        "HTTP-Referer": "http://localhost"
     }
 
     payload = {
         "model": "openai/gpt-3.5-turbo",
         "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": 7000,
+        "max_tokens": 3000,
         "temperature": 0.8,
     }
 
