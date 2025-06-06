@@ -7,3 +7,11 @@ services:
     envVars:
       - key: OPENROUTER_API_KEY
         sync: false
+      - key: MONGO_URI
+        sync: false
+      - key: PORT
+        value: 10000
+      - key: SENDER_EMAIL
+        sync: false
+      - key: SENDER_PASSWORD
+        sync: false
