@@ -1,10 +1,5 @@
 flask
 flask-cors
-reportlab
-python-dotenv
-requests
-Flask
-flask-cors
 python-dotenv
 requests
 reportlab
